@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sbanken.ConsoleApp", "sample\Sbanken.ConsoleApp\Sbanken.ConsoleApp.csproj", "{12E85707-3C1D-4EC4-AE37-70961F9A9AFD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sbanken.DotNet.Tests", "test\Sbanken.DotNet.Tests\Sbanken.DotNet.Tests.csproj", "{B0C7C51C-9371-414A-A67F-ACDD9073E7D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{12E85707-3C1D-4EC4-AE37-70961F9A9AFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12E85707-3C1D-4EC4-AE37-70961F9A9AFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12E85707-3C1D-4EC4-AE37-70961F9A9AFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0C7C51C-9371-414A-A67F-ACDD9073E7D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0C7C51C-9371-414A-A67F-ACDD9073E7D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0C7C51C-9371-414A-A67F-ACDD9073E7D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0C7C51C-9371-414A-A67F-ACDD9073E7D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -40,6 +46,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{CF72BED8-14A0-4833-8FE2-DC0376E4D458} = {53DCB5D3-46B3-4AD2-BC1F-186DCF63E3F7}
 		{12E85707-3C1D-4EC4-AE37-70961F9A9AFD} = {650F2943-985E-4DFA-BBD3-47C269F7F079}
+		{B0C7C51C-9371-414A-A67F-ACDD9073E7D1} = {673B8133-D00A-4041-B8A9-00D0674A4A00}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B2CA375E-B673-4A93-88EC-B675D5A03785}

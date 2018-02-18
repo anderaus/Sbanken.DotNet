@@ -3,7 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sbanken.DotNet", "Sbanken.DotNet\Sbanken.DotNet.csproj", "{CF72BED8-14A0-4833-8FE2-DC0376E4D458}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sbanken.DotNet", "src\Sbanken.DotNet\Sbanken.DotNet.csproj", "{CF72BED8-14A0-4833-8FE2-DC0376E4D458}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{53DCB5D3-46B3-4AD2-BC1F-186DCF63E3F7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{673B8133-D00A-4041-B8A9-00D0674A4A00}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{650F2943-985E-4DFA-BBD3-47C269F7F079}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F0CBD182-65A1-48A4-9C29-810D3AA55D4F}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sbanken.ConsoleApp", "sample\Sbanken.ConsoleApp\Sbanken.ConsoleApp.csproj", "{12E85707-3C1D-4EC4-AE37-70961F9A9AFD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +29,17 @@ Global
 		{CF72BED8-14A0-4833-8FE2-DC0376E4D458}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF72BED8-14A0-4833-8FE2-DC0376E4D458}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF72BED8-14A0-4833-8FE2-DC0376E4D458}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12E85707-3C1D-4EC4-AE37-70961F9A9AFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12E85707-3C1D-4EC4-AE37-70961F9A9AFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12E85707-3C1D-4EC4-AE37-70961F9A9AFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12E85707-3C1D-4EC4-AE37-70961F9A9AFD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CF72BED8-14A0-4833-8FE2-DC0376E4D458} = {53DCB5D3-46B3-4AD2-BC1F-186DCF63E3F7}
+		{12E85707-3C1D-4EC4-AE37-70961F9A9AFD} = {650F2943-985E-4DFA-BBD3-47C269F7F079}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B2CA375E-B673-4A93-88EC-B675D5A03785}

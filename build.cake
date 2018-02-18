@@ -10,12 +10,12 @@ var configuration =
 // 2. Otherwise if running on AppVeyor, get it's build number.
 // 3. Otherwise if running on Travis CI, get it's build number.
 // 4. Otherwise if an Environment variable exists, use that.
-// 5. Otherwise default the build number to 0.
+// 5. Otherwise default the build number to 1.
 var buildNumber =
     HasArgument("BuildNumber") ? Argument<int>("BuildNumber") :
     AppVeyor.IsRunningOnAppVeyor ? AppVeyor.Environment.Build.Number :
     TravisCI.IsRunningOnTravisCI ? TravisCI.Environment.Build.BuildNumber :
-    EnvironmentVariable("BuildNumber") != null ? int.Parse(EnvironmentVariable("BuildNumber")) : 0;
+    EnvironmentVariable("BuildNumber") != null ? int.Parse(EnvironmentVariable("BuildNumber")) : 1;
 
 // Assume we're building on appveyor for publishing NuGets
 // So always add a beta prefix if not doing a tag
@@ -49,11 +49,13 @@ Task("Build")
         foreach(var solution in solutions)
         {
             Information("Building solution " + solution);
+            Information("Version suffix " + revision);
             DotNetCoreBuild(
                 solution.ToString(),
                 new DotNetCoreBuildSettings()
                 {
-                    Configuration = configuration
+                    Configuration = configuration,
+                    VersionSuffix = revision
                 });
         }
     });
@@ -87,6 +89,7 @@ Task("Pack")
         foreach (var project in GetFiles("./src/**/*.csproj"))
         {
             Information("Packing project " + project);
+            Information("Revision " + revision);
             DotNetCorePack(
                 project.GetDirectory().FullPath,
                 new DotNetCorePackSettings()

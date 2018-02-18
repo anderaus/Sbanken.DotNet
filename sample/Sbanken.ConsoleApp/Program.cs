@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Sbanken.ConsoleApp.ModelExtensions;
 using Sbanken.DotNet;
 using System.IO;
 using System.Threading.Tasks;

@@ -15,11 +15,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
+		appveyor.yml = appveyor.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sbanken.ConsoleApp", "sample\Sbanken.ConsoleApp\Sbanken.ConsoleApp.csproj", "{12E85707-3C1D-4EC4-AE37-70961F9A9AFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sbanken.DotNet.Tests", "test\Sbanken.DotNet.Tests\Sbanken.DotNet.Tests.csproj", "{B0C7C51C-9371-414A-A67F-ACDD9073E7D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sbanken.DotNet.Tests", "test\Sbanken.DotNet.Tests\Sbanken.DotNet.Tests.csproj", "{B0C7C51C-9371-414A-A67F-ACDD9073E7D1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{10F03AC5-ECDA-4F58-9BD5-1C5053DA7A53}"
+	ProjectSection(SolutionItems) = preProject
+		tools\packages.config = tools\packages.config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

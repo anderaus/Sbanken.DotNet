@@ -1,4 +1,4 @@
-﻿using Sbanken.DotNet.Models;
+﻿using Sbanken.DotNet.Models.Customers;
 using System.Threading.Tasks;
 
 namespace Sbanken.DotNet.Operations

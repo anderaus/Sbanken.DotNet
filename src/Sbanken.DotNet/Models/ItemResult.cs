@@ -2,10 +2,10 @@
 
 namespace Sbanken.DotNet.Models
 {
-    public class CustomerResult
+    public class ItemResult<T>
     {
         [JsonProperty("item")]
-        public Customer Item { get; set; }
+        public T Item { get; set; }
 
         [JsonProperty("errorType")]
         public string ErrorType { get; set; }

@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
-namespace Sbanken.DotNet.Models
+namespace Sbanken.DotNet.Models.Customers
 {
     public class PhoneNumber
     {

@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace Sbanken.DotNet.Models
+namespace Sbanken.DotNet.Models.Customers
 {
     public class Customer
     {

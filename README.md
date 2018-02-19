@@ -12,9 +12,9 @@ Sbanken.DotNet is a lightweight C# wrapper for the Sbanken API endpoints:
 > https://api.sbanken.no/Bank/swagger   
 > https://api.sbanken.no/Customers/swagger
 
-Features:
+### Features
 - Automatic access token renewal
-- Supports >= .netstandard 1.4
+- Supports >= .NET Standard 1.4
 
 ## Installation
 

@@ -24,5 +24,16 @@ namespace Sbanken.DotNet.Operations
             }
             return accountsResult.Items;
         }
+
+        public async Task<Account> GetAccount(string customerId, string accountNumber)
+        {
+            var accountResult = await _client.Get<ItemResult<Account>>($"Bank/api/v1/Accounts/{customerId}/{accountNumber}");
+            if (accountResult.IsError)
+            {
+                throw new SbankenException(accountResult.ErrorMessage, accountResult.ErrorType);
+            }
+
+            return accountResult.Item;
+        }
     }
 }

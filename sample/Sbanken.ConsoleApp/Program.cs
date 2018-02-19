@@ -1,7 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Sbanken.ConsoleApp.ModelExtensions;
 using Sbanken.DotNet;
+using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Sbanken.ConsoleApp
@@ -25,7 +27,18 @@ namespace Sbanken.ConsoleApp
                 customer.PrettyPrint();
 
                 var accounts = await client.Bank.GetAccounts(AppSettings.CustomerId);
-                accounts.PrettyPrint();
+                Console.WriteLine("Accounts");
+                foreach (var account in accounts)
+                {
+                    account.PrettyPrint();
+                }
+
+                var bestAccount =
+                    await client.Bank.GetAccount(
+                        AppSettings.CustomerId,
+                        accounts.OrderByDescending(a => a.Balance).First().AccountNumber);
+                Console.WriteLine("Refetched single account with highest balance");
+                bestAccount.PrettyPrint();
             }
         }
 

@@ -5,3 +5,46 @@
 
 🏦 Unofficial .NET (C#) client library for Sbanken API
 
+## What is Sbanken.DotNet?
+
+Sbanken.DotNet is a lightweight C# wrapper for the Sbanken API endpoints:
+
+> https://api.sbanken.no/Bank/swagger   
+> https://api.sbanken.no/Customers/swagger
+
+Features:
+- Automatic access token renewal
+- Supports >= .netstandard 1.4
+
+## Installation
+
+Nuget package coming soon... 
+
+## Usage
+
+Register at https://sbanken.no/bruke/utviklerportalen to get `CLIENT_ID` and `SECRET`. The `CUSTOMER_ID` is your SSN (fødselsnummer).
+
+```cs
+using Sbanken.DotNet;
+
+using (var client = new SbankenClient(CLIENT_ID, SECRET)) {
+    
+    // Fetch customer metadata
+    var customer = await client.Customers.Get(CUSTOMER_ID);
+
+    // Fetch all bank accounts and balances
+    var accounts = await client.Bank.GetAccounts(CUSTOMER_ID);
+
+    // Loop accounts and print balance
+    foreach (var account in accounts) {
+        Console.WriteLine(
+            $"Got account {account.Name} with balance {account.Balance});
+    }
+}
+```
+
+Currently, the Sbanken API only supports operations on accounts you own.
+
+## Links
+- [Sbanken developer portal](https://sbanken.no/bruke/utviklerportalen/)
+- [A first look at the SBanken Open Banking API](http://blog.novanet.no/a-first-look-at-the-sbanken-open-banking-api/)

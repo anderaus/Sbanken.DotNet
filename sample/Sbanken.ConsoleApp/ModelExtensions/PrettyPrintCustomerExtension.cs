@@ -3,7 +3,7 @@ using System;
 
 namespace Sbanken.ConsoleApp.ModelExtensions
 {
-    public static class PrettyPrintExtensions
+    public static class PrettyPrintCustomerExtension
     {
         public static void PrettyPrint(this Customer customer, bool censorCustomerId = true)
         {

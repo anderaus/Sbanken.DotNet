@@ -32,9 +32,11 @@ namespace Sbanken.DotNet
             };
 
             Customers = new CustomerOperations(this);
+            Bank = new BankOperations(this);
         }
 
         public ICustomerOperations Customers { get; }
+        public IBankOperations Bank { get; }
 
         internal async Task<T> Get<T>(string relativeUrl)
         {

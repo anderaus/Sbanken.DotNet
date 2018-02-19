@@ -23,6 +23,9 @@ namespace Sbanken.ConsoleApp
             {
                 var customer = await client.Customers.Get(AppSettings.CustomerId);
                 customer.PrettyPrint();
+
+                var accounts = await client.Bank.GetAccounts(AppSettings.CustomerId);
+                accounts.PrettyPrint();
             }
         }
 

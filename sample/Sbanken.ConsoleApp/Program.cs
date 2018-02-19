@@ -8,20 +8,20 @@ namespace Sbanken.ConsoleApp
 {
     class Program
     {
-        private static AppSettings _appSettings { get; set; }
+        private static AppSettings AppSettings { get; set; }
 
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             ReadConfiguration();
 
-            RunExample().GetAwaiter().GetResult();
+            await RunExample();
         }
 
         private static async Task RunExample()
         {
-            using (var client = new SbankenClient(_appSettings.ClientId, _appSettings.ClientSecret))
+            using (var client = new SbankenClient(AppSettings.ClientId, AppSettings.ClientSecret))
             {
-                var customer = await client.Customers.Get(_appSettings.CustomerId);
+                var customer = await client.Customers.Get(AppSettings.CustomerId);
                 customer.PrettyPrint();
             }
         }
@@ -33,7 +33,7 @@ namespace Sbanken.ConsoleApp
                 .AddJsonFile("appsettings.json");
 
             var config = builder.Build();
-            _appSettings = new AppSettings
+            AppSettings = new AppSettings
             {
                 ClientId = config.GetSection("clientId").Value,
                 ClientSecret = config.GetSection("clientSecret").Value,

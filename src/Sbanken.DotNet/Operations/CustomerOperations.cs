@@ -1,4 +1,5 @@
 ﻿using Sbanken.DotNet.Exceptions;
+using Sbanken.DotNet.Http;
 using Sbanken.DotNet.Models;
 using Sbanken.DotNet.Models.Customers;
 using System.Threading.Tasks;
@@ -7,16 +8,16 @@ namespace Sbanken.DotNet.Operations
 {
     internal class CustomerOperations : ICustomerOperations
     {
-        private readonly SbankenClient _client;
+        private readonly IConnection _connection;
 
-        public CustomerOperations(SbankenClient client)
+        public CustomerOperations(IConnection connection)
         {
-            _client = client;
+            _connection = connection;
         }
 
         public async Task<Customer> Get(string customerId)
         {
-            var customerResult = await _client.Get<ItemResult<Customer>>($"Customers/api/v1/Customers/{customerId}");
+            var customerResult = await _connection.Get<ItemResult<Customer>>($"Customers/api/v1/Customers/{customerId}");
             if (customerResult.IsError)
             {
                 throw new SbankenException(customerResult.ErrorMessage, customerResult.ErrorType);

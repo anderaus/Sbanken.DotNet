@@ -10,6 +10,7 @@
     <PackageProjectUrl>https://github.com/anderaus/Sbanken.DotNet</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>git://github.com/anderaus/Sbanken.DotNet</RepositoryUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/anderaus/Sbanken.DotNet/master/assets/sbanken-dotnet-logo-512.png</PackageIconUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

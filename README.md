@@ -2,8 +2,9 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/drouf5rqk0mgjjv6?svg=true)](https://ci.appveyor.com/project/anderaus/sbanken-dotnet)
 [![Test stats](https://img.shields.io/appveyor/tests/anderaus/sbanken-dotnet.svg)](https://ci.appveyor.com/project/anderaus/sbanken-dotnet/build/tests)
+[![NuGet](https://img.shields.io/nuget/v/Sbanken.DotNet.svg)](https://www.nuget.org/packages/Sbanken.DotNet/)
 
-🏦 Unofficial .NET (C#) client library for Sbanken API
+Unofficial .NET (C#) client library for Sbanken API
 
 ## What is Sbanken.DotNet?
 
@@ -15,10 +16,6 @@ Sbanken.DotNet is a lightweight C# wrapper for the Sbanken API endpoints:
 ### Features
 - Automatic access token renewal
 - Supports >= .NET Standard 1.4
-
-## Installation
-
-Nuget package coming soon... 
 
 ## Usage
 
@@ -46,5 +43,6 @@ using (var client = new SbankenClient(CLIENT_ID, SECRET)) {
 Currently, the Sbanken API only supports operations on accounts you own.
 
 ## Links
+- [Nuget package](https://www.nuget.org/packages/Sbanken.DotNet/)
 - [Sbanken developer portal](https://sbanken.no/bruke/utviklerportalen/)
 - [A first look at the SBanken Open Banking API](http://blog.novanet.no/a-first-look-at-the-sbanken-open-banking-api/)

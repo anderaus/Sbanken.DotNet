@@ -2,6 +2,7 @@
 using Sbanken.DotNet.Http;
 using Sbanken.DotNet.Models;
 using Sbanken.DotNet.Models.Bank;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -35,6 +36,26 @@ namespace Sbanken.DotNet.Operations
             }
 
             return accountResult.Item;
+        }
+
+        public async Task<IEnumerable<Transaction>> GetTransactions(string customerId, string accountNumber, int index, int length, DateTime startDate, DateTime endDate)
+        {
+            var transactionsResult = await _connection.Get<ListResult<Transaction>>(
+                $"Bank/api/v1/Transactions/{customerId}/{accountNumber}",
+                new Dictionary<string, string>
+                {
+                    {"index", index.ToString()},
+                    {"length", length.ToString()},
+                    {"startDate", startDate.ToString("o")},
+                    {"endDate", endDate.ToString("o")}
+                });
+
+            if (transactionsResult.IsError)
+            {
+                throw new SbankenException(transactionsResult.ErrorMessage, transactionsResult.ErrorType);
+            }
+
+            return transactionsResult.Items;
         }
     }
 }

@@ -5,12 +5,13 @@
     <VersionPrefix>0.1.0</VersionPrefix>
     <Authors>Anders Austad</Authors>
     <Company />
-    <Product>Unofficial .NET (C#) client library for Sbanken API</Product>
+    <Product></Product>
     <PackageTags></PackageTags>
     <PackageProjectUrl>https://github.com/anderaus/Sbanken.DotNet</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>git://github.com/anderaus/Sbanken.DotNet</RepositoryUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/anderaus/Sbanken.DotNet/master/assets/sbanken-dotnet-logo-512.png</PackageIconUrl>
+    <Description>Unofficial .NET (C#) client library for Sbanken API</Description>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

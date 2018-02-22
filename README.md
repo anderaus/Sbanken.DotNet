@@ -19,6 +19,18 @@ Sbanken.DotNet is a lightweight C# wrapper for the Sbanken API endpoints:
 
 ## Usage
 
+Install latest package from nuget using the package manager
+
+```
+Install-Package Sbanken.DotNet
+```
+
+or the .NET CLI
+```
+dotnet add package Sbanken.DotNet
+```
+
+
 Register at https://sbanken.no/bruke/utviklerportalen to get `CLIENT_ID` and `SECRET`. The `CUSTOMER_ID` is your SSN (fødselsnummer).
 
 ```cs

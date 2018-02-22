@@ -7,3 +7,11 @@ test: off
 artifacts:
 - path: .\artifacts\**\*.nupkg
   name: NuGet
+deploy:  
+- provider: NuGet
+  name: production
+  api_key:
+    secure: TAD+giSzuH3SncP/wWKPp5My1R0cT59BTDXbT6JdUfFASROW/UbFrC7+GimO3JWZ
+  on:
+    branch: master
+    appveyor_repo_tag: true

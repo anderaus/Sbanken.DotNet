@@ -1,5 +1,6 @@
 ﻿using Sbanken.DotNet.Exceptions;
 using Sbanken.DotNet.Http;
+using Sbanken.DotNet.Models;
 using Sbanken.DotNet.Models.Response;
 using Sbanken.DotNet.Models.Response.Bank;
 using System;
@@ -17,14 +18,14 @@ namespace Sbanken.DotNet.Operations
             _connection = connection;
         }
 
-        public async Task<IReadOnlyList<Account>> GetAccounts(string customerId)
+        public async Task<PagedResult<Account>> GetAccounts(string customerId)
         {
             var accountsResult = await _connection.Get<ListResult<Account>>($"Bank/api/v1/Accounts/{customerId}");
             if (accountsResult.IsError)
             {
                 throw new SbankenException(accountsResult.ErrorMessage, accountsResult.ErrorType);
             }
-            return accountsResult.Items;
+            return new PagedResult<Account>(accountsResult.Items, accountsResult.AvailableItems);
         }
 
         public async Task<Account> GetAccount(string customerId, string accountNumber)
@@ -38,7 +39,7 @@ namespace Sbanken.DotNet.Operations
             return accountResult.Item;
         }
 
-        public async Task<IReadOnlyList<Transaction>> GetTransactions(string customerId, string accountNumber,
+        public async Task<PagedResult<Transaction>> GetTransactions(string customerId, string accountNumber,
             int index = 0, int length = 100, DateTime? startDate = null, DateTime? endDate = null)
         {
             var parameters = new Dictionary<string, string>
@@ -58,7 +59,7 @@ namespace Sbanken.DotNet.Operations
                 throw new SbankenException(transactionsResult.ErrorMessage, transactionsResult.ErrorType);
             }
 
-            return transactionsResult.Items;
+            return new PagedResult<Transaction>(transactionsResult.Items, transactionsResult.AvailableItems);
         }
     }
 }

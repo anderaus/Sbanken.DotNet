@@ -1,7 +1,7 @@
 ﻿using Sbanken.DotNet.Exceptions;
 using Sbanken.DotNet.Http;
-using Sbanken.DotNet.Models;
-using Sbanken.DotNet.Models.Customers;
+using Sbanken.DotNet.Models.Response;
+using Sbanken.DotNet.Models.Response.Customers;
 using System.Threading.Tasks;
 
 namespace Sbanken.DotNet.Operations

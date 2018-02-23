@@ -1,4 +1,4 @@
-﻿using Sbanken.DotNet.Models.Bank;
+﻿using Sbanken.DotNet.Models.Response.Bank;
 using System;
 
 namespace Sbanken.ConsoleApp.ModelExtensions

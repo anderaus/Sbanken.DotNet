@@ -37,7 +37,7 @@ namespace Sbanken.ConsoleApp
                     await client.Bank.GetAccount(
                         AppSettings.CustomerId,
                         accounts.OrderByDescending(a => a.Balance).First().AccountNumber);
-                Console.WriteLine("Refetched single account with highest balance");
+                Console.WriteLine($"{Environment.NewLine}Refetched single account with highest balance");
                 bestAccount.PrettyPrint();
 
                 var transactions =
@@ -47,7 +47,9 @@ namespace Sbanken.ConsoleApp
                         0,
                         5,
                         DateTime.UtcNow.AddDays(-30),
-                        DateTime.UtcNow.AddDays(-5));
+                        DateTime.UtcNow.AddDays(-5)
+                        );
+                Console.WriteLine($"{Environment.NewLine}Latest transactions for account {bestAccount.AccountNumber}");
                 foreach (var transaction in transactions)
                 {
                     transaction.PrettyPrint();

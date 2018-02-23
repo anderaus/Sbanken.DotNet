@@ -1,7 +1,7 @@
 ﻿using Sbanken.DotNet.Exceptions;
 using Sbanken.DotNet.Http;
-using Sbanken.DotNet.Models;
-using Sbanken.DotNet.Models.Bank;
+using Sbanken.DotNet.Models.Response;
+using Sbanken.DotNet.Models.Response.Bank;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -17,7 +17,7 @@ namespace Sbanken.DotNet.Operations
             _connection = connection;
         }
 
-        public async Task<IEnumerable<Account>> GetAccounts(string customerId)
+        public async Task<IReadOnlyList<Account>> GetAccounts(string customerId)
         {
             var accountsResult = await _connection.Get<ListResult<Account>>($"Bank/api/v1/Accounts/{customerId}");
             if (accountsResult.IsError)
@@ -38,17 +38,20 @@ namespace Sbanken.DotNet.Operations
             return accountResult.Item;
         }
 
-        public async Task<IEnumerable<Transaction>> GetTransactions(string customerId, string accountNumber, int index, int length, DateTime startDate, DateTime endDate)
+        public async Task<IReadOnlyList<Transaction>> GetTransactions(string customerId, string accountNumber,
+            int index = 0, int length = 100, DateTime? startDate = null, DateTime? endDate = null)
         {
+            var parameters = new Dictionary<string, string>
+            {
+                {"index", index.ToString()},
+                {"length", length.ToString()}
+            };
+
+            if (startDate.HasValue) parameters.Add("startDate", startDate.Value.ToString("o"));
+            if (endDate.HasValue) parameters.Add("endDate", endDate.Value.ToString("o"));
+
             var transactionsResult = await _connection.Get<ListResult<Transaction>>(
-                $"Bank/api/v1/Transactions/{customerId}/{accountNumber}",
-                new Dictionary<string, string>
-                {
-                    {"index", index.ToString()},
-                    {"length", length.ToString()},
-                    {"startDate", startDate.ToString("o")},
-                    {"endDate", endDate.ToString("o")}
-                });
+                $"Bank/api/v1/Transactions/{customerId}/{accountNumber}", parameters);
 
             if (transactionsResult.IsError)
             {

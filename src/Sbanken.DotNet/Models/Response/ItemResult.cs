@@ -2,7 +2,7 @@
 
 namespace Sbanken.DotNet.Models.Response
 {
-    public class ItemResult<T>
+    public class ItemResult<T> : IResult
     {
         [JsonProperty("item")]
         public T Item { get; protected set; }

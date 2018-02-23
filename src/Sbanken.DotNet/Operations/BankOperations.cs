@@ -1,5 +1,4 @@
-﻿using Sbanken.DotNet.Exceptions;
-using Sbanken.DotNet.Http;
+﻿using Sbanken.DotNet.Http;
 using Sbanken.DotNet.Models;
 using Sbanken.DotNet.Models.Response;
 using Sbanken.DotNet.Models.Response.Bank;
@@ -9,33 +8,21 @@ using System.Threading.Tasks;
 
 namespace Sbanken.DotNet.Operations
 {
-    public class BankOperations : IBankOperations
+    public class BankOperations : OperationsBase, IBankOperations
     {
-        private readonly IConnection _connection;
-
-        public BankOperations(IConnection connection)
-        {
-            _connection = connection;
-        }
+        public BankOperations(IConnection connection) : base(connection) { }
 
         public async Task<PagedResult<Account>> GetAccounts(string customerId)
         {
-            var accountsResult = await _connection.Get<ListResult<Account>>($"Bank/api/v1/Accounts/{customerId}");
-            if (accountsResult.IsError)
-            {
-                throw new SbankenException(accountsResult.ErrorMessage, accountsResult.ErrorType);
-            }
+            var accountsResult = await Connection.Get<ListResult<Account>>($"Bank/api/v1/Accounts/{customerId}");
+            EnsureSuccessfulResult(accountsResult);
             return new PagedResult<Account>(accountsResult.Items, accountsResult.AvailableItems);
         }
 
         public async Task<Account> GetAccount(string customerId, string accountNumber)
         {
-            var accountResult = await _connection.Get<ItemResult<Account>>($"Bank/api/v1/Accounts/{customerId}/{accountNumber}");
-            if (accountResult.IsError)
-            {
-                throw new SbankenException(accountResult.ErrorMessage, accountResult.ErrorType);
-            }
-
+            var accountResult = await Connection.Get<ItemResult<Account>>($"Bank/api/v1/Accounts/{customerId}/{accountNumber}");
+            EnsureSuccessfulResult(accountResult);
             return accountResult.Item;
         }
 
@@ -51,14 +38,10 @@ namespace Sbanken.DotNet.Operations
             if (startDate.HasValue) parameters.Add("startDate", startDate.Value.ToString("o"));
             if (endDate.HasValue) parameters.Add("endDate", endDate.Value.ToString("o"));
 
-            var transactionsResult = await _connection.Get<ListResult<Transaction>>(
+            var transactionsResult = await Connection.Get<ListResult<Transaction>>(
                 $"Bank/api/v1/Transactions/{customerId}/{accountNumber}", parameters);
 
-            if (transactionsResult.IsError)
-            {
-                throw new SbankenException(transactionsResult.ErrorMessage, transactionsResult.ErrorType);
-            }
-
+            EnsureSuccessfulResult(transactionsResult);
             return new PagedResult<Transaction>(transactionsResult.Items, transactionsResult.AvailableItems);
         }
     }

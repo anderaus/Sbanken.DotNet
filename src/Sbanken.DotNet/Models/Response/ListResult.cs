@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Sbanken.DotNet.Models.Response
 {
-    public class ListResult<T>
+    public class ListResult<T> : IResult
     {
         [JsonProperty("availableItems")]
         public int AvailableItems { get; protected set; }

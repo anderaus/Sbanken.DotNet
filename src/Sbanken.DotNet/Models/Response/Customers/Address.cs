@@ -5,24 +5,24 @@ namespace Sbanken.DotNet.Models.Response.Customers
     public class Address
     {
         [JsonProperty("addressLine1")]
-        public string AddressLine1 { get; protected set; }
+        public string AddressLine1 { get; set; }
 
         [JsonProperty("addressLine2")]
-        public string AddressLine2 { get; protected set; }
+        public string AddressLine2 { get; set; }
 
         [JsonProperty("addressLine3")]
-        public string AddressLine3 { get; protected set; }
+        public string AddressLine3 { get; set; }
 
         [JsonProperty("addressLine4")]
-        public string AddressLine4 { get; protected set; }
+        public string AddressLine4 { get; set; }
 
         [JsonProperty("country")]
-        public string Country { get; protected set; }
+        public string Country { get; set; }
 
         [JsonProperty("zipCode")]
-        public string ZipCode { get; protected set; }
+        public string ZipCode { get; set; }
 
         [JsonProperty("city")]
-        public string City { get; protected set; }
+        public string City { get; set; }
     }
 }

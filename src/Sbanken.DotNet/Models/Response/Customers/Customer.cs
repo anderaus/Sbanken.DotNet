@@ -6,27 +6,27 @@ namespace Sbanken.DotNet.Models.Response.Customers
     public class Customer
     {
         [JsonProperty("customerId")]
-        public string CustomerId { get; protected set; }
+        public string CustomerId { get; set; }
 
         [JsonProperty("firstName")]
-        public string FirstName { get; protected set; }
+        public string FirstName { get; set; }
 
         [JsonProperty("lastName")]
-        public string LastName { get; protected set; }
+        public string LastName { get; set; }
 
         [JsonProperty("emailAddress")]
-        public string EmailAddress { get; protected set; }
+        public string EmailAddress { get; set; }
 
         [JsonProperty("dateOfBirth")]
-        public string DateOfBirth { get; protected set; }
+        public string DateOfBirth { get; set; }
 
         [JsonProperty("postalAddress")]
-        public Address PostalAddress { get; protected set; }
+        public Address PostalAddress { get; set; }
 
         [JsonProperty("streetAddress")]
-        public Address StreetAddress { get; protected set; }
+        public Address StreetAddress { get; set; }
 
         [JsonProperty("phoneNumbers")]
-        public IReadOnlyList<PhoneNumber> PhoneNumbers { get; protected set; }
+        public IReadOnlyList<PhoneNumber> PhoneNumbers { get; set; }
     }
 }

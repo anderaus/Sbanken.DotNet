@@ -1,4 +1,5 @@
-﻿using Sbanken.DotNet.Http;
+﻿using Sbanken.DotNet.Helpers;
+using Sbanken.DotNet.Http;
 using Sbanken.DotNet.Models;
 using Sbanken.DotNet.Models.Response;
 using Sbanken.DotNet.Models.Response.Bank;
@@ -14,6 +15,8 @@ namespace Sbanken.DotNet.Operations
 
         public async Task<PagedResult<Account>> GetAccounts(string customerId)
         {
+            Ensure.NotNullOrEmpty(customerId, nameof(customerId));
+
             var accountsResult = await Connection.Get<ListResult<Account>>($"Bank/api/v1/Accounts/{customerId}");
             EnsureSuccessfulResult(accountsResult);
             return new PagedResult<Account>(accountsResult.Items, accountsResult.AvailableItems);
@@ -21,6 +24,9 @@ namespace Sbanken.DotNet.Operations
 
         public async Task<Account> GetAccount(string customerId, string accountNumber)
         {
+            Ensure.NotNullOrEmpty(customerId, nameof(customerId));
+            Ensure.NotNullOrEmpty(accountNumber, nameof(accountNumber));
+
             var accountResult = await Connection.Get<ItemResult<Account>>($"Bank/api/v1/Accounts/{customerId}/{accountNumber}");
             EnsureSuccessfulResult(accountResult);
             return accountResult.Item;
@@ -29,6 +35,9 @@ namespace Sbanken.DotNet.Operations
         public async Task<PagedResult<Transaction>> GetTransactions(string customerId, string accountNumber,
             int index = 0, int length = 100, DateTime? startDate = null, DateTime? endDate = null)
         {
+            Ensure.NotNullOrEmpty(customerId, nameof(customerId));
+            Ensure.NotNullOrEmpty(accountNumber, nameof(accountNumber));
+
             var parameters = new Dictionary<string, string>
             {
                 {"index", index.ToString()},

@@ -12,8 +12,8 @@ namespace Sbanken.DotNet.Tests
 {
     public class CustomerOperationsTests
     {
-        private CustomerOperations _customerOperations;
-        private IConnection _connection;
+        private readonly CustomerOperations _customerOperations;
+        private readonly IConnection _connection;
 
         public CustomerOperationsTests()
         {
@@ -44,7 +44,7 @@ namespace Sbanken.DotNet.Tests
             }
             );
 
-            var exception = await Assert.ThrowsAsync<SbankenException>(() => _customerOperations.Get("customerId"));
+            var exception = await Assert.ThrowsAsync<SbankenException>(() => _customerOperations.Get("12037649749"));
 
             Assert.Equal("Something went very wrong, ErrorType: TheErrorType", exception.Message);
         }
@@ -63,7 +63,9 @@ namespace Sbanken.DotNet.Tests
             }
             );
 
-            var result = await _customerOperations.Get("customerId");
+            var result = await _customerOperations.Get("12037649749");
+
+            A.CallTo(() => _connection.Get<ItemResult<Customer>>("Customers/api/v1/Customers/12037649749", null)).MustHaveHappenedOnceExactly();
 
             Assert.Equal("Roger", result.FirstName);
             Assert.Equal("Wilco", result.LastName);

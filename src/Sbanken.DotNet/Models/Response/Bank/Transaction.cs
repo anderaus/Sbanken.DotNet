@@ -6,33 +6,33 @@ namespace Sbanken.DotNet.Models.Response.Bank
     public class Transaction
     {
         [JsonProperty("transactionId")]
-        public string TransactionId { get; protected set; }
+        public string TransactionId { get; set; }
 
         [JsonProperty("customerId")]
-        public string CustomerId { get; protected set; }
+        public string CustomerId { get; set; }
 
         [JsonProperty("accountNumber")]
-        public string AccountNumber { get; protected set; }
+        public string AccountNumber { get; set; }
 
         [JsonProperty("otherAccountNumber")]
-        public string OtherAccountNumber { get; protected set; }
+        public string OtherAccountNumber { get; set; }
 
         [JsonProperty("amount")]
-        public decimal Amount { get; protected set; }
+        public decimal Amount { get; set; }
 
         [JsonProperty("text")]
-        public string Text { get; protected set; }
+        public string Text { get; set; }
 
         [JsonProperty("transactionType")]
-        public string TransactionType { get; protected set; }
+        public string TransactionType { get; set; }
 
         [JsonProperty("registrationDate")]
-        public DateTime? RegistrationDate { get; protected set; }
+        public DateTime? RegistrationDate { get; set; }
 
         [JsonProperty("accountingDate")]
-        public DateTime? AccountingDate { get; protected set; }
+        public DateTime? AccountingDate { get; set; }
 
         [JsonProperty("interestDate")]
-        public DateTime? InterestDate { get; protected set; }
+        public DateTime? InterestDate { get; set; }
     }
 }

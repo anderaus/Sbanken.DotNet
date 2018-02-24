@@ -23,9 +23,11 @@ namespace Sbanken.ConsoleApp
         {
             using (var client = new SbankenClient(AppSettings.ClientId, AppSettings.ClientSecret))
             {
+                // Get customer information
                 var customer = await client.Customers.Get(AppSettings.CustomerId);
                 customer.PrettyPrint();
 
+                // Get all customer accounts
                 var accounts = await client.Bank.GetAccounts(AppSettings.CustomerId);
                 Console.WriteLine("Accounts");
                 foreach (var account in accounts.Items)
@@ -33,27 +35,39 @@ namespace Sbanken.ConsoleApp
                     account.PrettyPrint();
                 }
 
-                var bestAccount =
-                    await client.Bank.GetAccount(
-                        AppSettings.CustomerId,
-                        accounts.Items.OrderByDescending(a => a.Balance).First().AccountNumber);
-                Console.WriteLine($"{Environment.NewLine}Refetched single account with highest balance");
-                bestAccount.PrettyPrint();
+                var savingsAccountNumber = accounts.Items.Single(a => a.Name == "Hovedkonto").AccountNumber;
+                var spendingAccountNumber = accounts.Items.Single(a => a.Name == "Visakonto").AccountNumber;
 
+                // Get a single account
+                var savingsAccount =
+                    await client.Bank.GetAccount(AppSettings.CustomerId, savingsAccountNumber);
+                Console.WriteLine($"{Environment.NewLine}Refetched savings account");
+                savingsAccount.PrettyPrint();
+
+                // Get a subset of transaction for one account
                 var transactions =
                     await client.Bank.GetTransactions(
                         AppSettings.CustomerId,
-                        bestAccount.AccountNumber,
+                        savingsAccountNumber,
                         0,
                         5,
                         DateTime.UtcNow.AddDays(-30),
                         DateTime.UtcNow.AddDays(-5)
                         );
-                Console.WriteLine($"{Environment.NewLine}Latest transactions for account {bestAccount.AccountNumber}");
+                Console.WriteLine($"{Environment.NewLine}Latest transactions for account {savingsAccountNumber}");
                 foreach (var transaction in transactions.Items)
                 {
                     transaction.PrettyPrint();
                 }
+
+                // Transfer 5 NOK from salary account to savings account
+                await client.Bank.Transfer(
+                    AppSettings.CustomerId,
+                    savingsAccountNumber,
+                    spendingAccountNumber,
+                    5.0m,
+                    "Testing Sbanken.DotNet");
+                Console.WriteLine("Transferred 5 NOK ok!");
             }
         }
 

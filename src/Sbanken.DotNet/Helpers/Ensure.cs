@@ -21,5 +21,13 @@ namespace Sbanken.DotNet.Helpers
                 throw new ArgumentException("String cannot be empty", name);
             }
         }
+
+        internal static void EqualOrGreaterThan(decimal minimum, decimal value, string name)
+        {
+            if (value < minimum)
+            {
+                throw new ArgumentOutOfRangeException(name, nameof(name));
+            }
+        }
     }
 }

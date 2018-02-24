@@ -1,9 +1,11 @@
 ﻿using IdentityModel.Client;
 using Newtonsoft.Json;
+using Sbanken.DotNet.Models.Response;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Sbanken.DotNet.Http
@@ -43,8 +45,22 @@ namespace Sbanken.DotNet.Http
             var response = await _httpClient.GetAsync(relativeUrl);
             response.EnsureSuccessStatusCode();
 
-            var content = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<T>(content);
+            var responseContent = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<T>(responseContent);
+        }
+
+        public async Task<NoResult> Post(string relativeUrl, object body)
+        {
+            var content = new StringContent(
+                JsonConvert.SerializeObject(body),
+                Encoding.UTF8,
+                "application/json");
+
+            var response = await _httpClient.PostAsync(relativeUrl, content);
+            response.EnsureSuccessStatusCode();
+
+            var responseContent = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<NoResult>(responseContent);
         }
 
         private static string GetParametersQuery(IDictionary<string, string> parameters)

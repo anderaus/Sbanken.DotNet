@@ -1,6 +1,7 @@
 ﻿using Sbanken.DotNet.Helpers;
 using Sbanken.DotNet.Http;
 using Sbanken.DotNet.Models;
+using Sbanken.DotNet.Models.Request;
 using Sbanken.DotNet.Models.Response;
 using Sbanken.DotNet.Models.Response.Bank;
 using System;
@@ -52,6 +53,28 @@ namespace Sbanken.DotNet.Operations
 
             EnsureSuccessfulResult(transactionsResult);
             return new PagedResult<Transaction>(transactionsResult.Items, transactionsResult.AvailableItems);
+        }
+
+        public async Task Transfer(string customerId, string fromAccount, string toAccount, decimal amount, string message)
+        {
+            Ensure.NotNullOrEmpty(customerId, nameof(customerId));
+            Ensure.NotNullOrEmpty(fromAccount, nameof(fromAccount));
+            Ensure.NotNullOrEmpty(toAccount, nameof(toAccount));
+            Ensure.EqualOrGreaterThan(1, amount, nameof(amount));
+            Ensure.NotNullOrEmpty(message, nameof(message));
+
+            var transferRequestBody = new Transfer
+            {
+                FromAccount = fromAccount,
+                ToAccount = toAccount,
+                Amount = amount,
+                Message = message
+            };
+
+            var transferResult = await Connection.Post(
+                $"Bank/api/v1/Transfers/{customerId}", transferRequestBody);
+
+            EnsureSuccessfulResult(transferResult);
         }
     }
 }

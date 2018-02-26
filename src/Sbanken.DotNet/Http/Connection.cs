@@ -22,8 +22,10 @@ namespace Sbanken.DotNet.Http
 
         public Connection(string clientId, string clientSecret)
         {
-            // Switch to regular TokenClient when this issue is fixed in the Sbanken API: https://github.com/Sbanken/api-examples/issues/11
-            _tokenClient = new CustomTokenClient(TokenEndpointUrl, clientId, clientSecret);
+            _tokenClient = new TokenClient(TokenEndpointUrl, clientId, clientSecret)
+            {
+                BasicAuthenticationHeaderStyle = TokenClient.AuthenticationHeaderStyle.Rfc2617
+            };
 
             var accessTokenHandler = new AccessTokenHandler(
                 _tokenClient,

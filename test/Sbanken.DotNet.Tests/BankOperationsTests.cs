@@ -81,5 +81,66 @@ namespace Sbanken.DotNet.Tests
             Assert.Equal("Savings", result.Items.First().Name);
             Assert.Equal("Salary", result.Items.Last().Name);
         }
+
+        [Fact]
+        public async Task GetAccount_WhenCustomerIdIsNull_ShouldThrowArgumentNullException()
+        {
+            await Assert.ThrowsAsync<ArgumentNullException>(() => _bankOperations.GetAccount(null, "accountNumber"));
+        }
+
+        [Fact]
+        public async Task GetAccount_WhenCustomerIdIsEmpty_ShouldThrowArgumentException()
+        {
+            await Assert.ThrowsAsync<ArgumentException>(() => _bankOperations.GetAccount("", "accountNumber"));
+        }
+
+        [Fact]
+        public async Task GetAccount_WhenAccountNumberIsNull_ShouldThrowArgumentNullException()
+        {
+            await Assert.ThrowsAsync<ArgumentNullException>(() => _bankOperations.GetAccount("customerId", null));
+        }
+
+        [Fact]
+        public async Task GetAccount_WhenAccountNumberIsEmpty_ShouldThrowArgumentException()
+        {
+            await Assert.ThrowsAsync<ArgumentException>(() => _bankOperations.GetAccount("customerId", ""));
+        }
+
+        [Fact]
+        public async Task GetAccount_WhenResultIsUnsuccessful_ShouldThrowSbankenException()
+        {
+            A.CallTo(() => _connection.Get<ItemResult<Account>>(A<string>._, null)).Returns(new ItemResult<Account>
+            {
+                IsError = true,
+                ErrorMessage = "Something went very wrong",
+                ErrorType = "TheErrorType"
+            }
+            );
+
+            var exception = await Assert.ThrowsAsync<SbankenException>(() => _bankOperations.GetAccount("12037649749", "12341212345"));
+
+            Assert.Equal("Something went very wrong, ErrorType: TheErrorType", exception.Message);
+        }
+
+        [Fact]
+        public async Task GetAccount_WhenResultIsSuccessful_ShouldReturnAccount()
+        {
+            A.CallTo(() => _connection.Get<ItemResult<Account>>(A<string>._, null)).Returns(new ItemResult<Account>
+            {
+                IsError = false,
+                Item = new Account
+                {
+                    Name = "Savings"
+                }
+            }
+            );
+
+            var result = await _bankOperations.GetAccount("12037649749", "12341212345");
+
+            A.CallTo(() => _connection.Get<ItemResult<Account>>("Bank/api/v1/Accounts/12037649749/12341212345", null)).MustHaveHappenedOnceExactly();
+
+            Assert.NotNull(result);
+            Assert.Equal("Savings", result.Name);
+        }
     }
 }

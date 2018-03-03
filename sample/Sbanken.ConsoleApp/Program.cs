@@ -47,13 +47,12 @@ namespace Sbanken.ConsoleApp
                 // Get a subset of transaction for one account
                 var transactions =
                     await client.Bank.GetTransactions(
-                        AppSettings.CustomerId,
-                        savingsAccountNumber,
-                        0,
-                        5,
-                        DateTime.UtcNow.AddDays(-30),
-                        DateTime.UtcNow.AddDays(-5)
-                        );
+                        customerId: AppSettings.CustomerId,
+                        accountNumber: spendingAccountNumber,
+                        index: 0,
+                        length: 20,
+                        startDate: DateTime.UtcNow.AddDays(-90),
+                        endDate: DateTime.UtcNow.AddDays(-5));
                 Console.WriteLine($"{Environment.NewLine}Latest transactions for account {savingsAccountNumber}");
                 foreach (var transaction in transactions.Items)
                 {

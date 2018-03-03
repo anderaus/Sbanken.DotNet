@@ -5,17 +5,17 @@ namespace Sbanken.DotNet.Models.Response.Bank
 {
     public class Transaction
     {
-        [JsonProperty("transactionId")]
-        public string TransactionId { get; set; }
+        [JsonProperty("accountingDate")]
+        public DateTime? AccountingDate { get; set; }
 
-        [JsonProperty("customerId")]
-        public string CustomerId { get; set; }
-
-        [JsonProperty("accountNumber")]
-        public string AccountNumber { get; set; }
+        [JsonProperty("interestDate")]
+        public DateTime? InterestDate { get; set; }
 
         [JsonProperty("otherAccountNumber")]
         public string OtherAccountNumber { get; set; }
+
+        [JsonProperty("otherAccountNumberSpecified")]
+        public bool OtherAccountNumberSpecified { get; set; }
 
         [JsonProperty("amount")]
         public decimal Amount { get; set; }
@@ -26,13 +26,25 @@ namespace Sbanken.DotNet.Models.Response.Bank
         [JsonProperty("transactionType")]
         public string TransactionType { get; set; }
 
-        [JsonProperty("registrationDate")]
-        public DateTime? RegistrationDate { get; set; }
+        [JsonProperty("transactionTypeCode")]
+        public int TransactionTypeCode { get; set; }
 
-        [JsonProperty("accountingDate")]
-        public DateTime? AccountingDate { get; set; }
+        [JsonProperty("transactionTypeText")]
+        public string TransactionTypeText { get; set; }
 
-        [JsonProperty("interestDate")]
-        public DateTime? InterestDate { get; set; }
+        [JsonProperty("isReservation")]
+        public bool IsReservation { get; set; }
+
+        [JsonProperty("reservationType")]
+        public string ReservationType { get; set; }
+
+        [JsonProperty("source")]
+        public string Source { get; set; }
+
+        [JsonProperty("cardDetails")]
+        public CardDetails CardDetails { get; set; }
+
+        [JsonProperty("cardDetailsSpecified")]
+        public bool CardDetailsSpecified { get; set; }
     }
 }

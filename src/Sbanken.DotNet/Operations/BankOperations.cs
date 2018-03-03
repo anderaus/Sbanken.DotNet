@@ -49,7 +49,7 @@ namespace Sbanken.DotNet.Operations
             if (endDate.HasValue) parameters.Add("endDate", endDate.Value.ToString("o"));
 
             var transactionsResult = await Connection.Get<ListResult<Transaction>>(
-                $"Bank/api/v1/Transactions/{customerId}/{accountNumber}", parameters);
+                $"Bank/api/v2/Transactions/{customerId}/{accountNumber}", parameters);
 
             EnsureSuccessfulResult(transactionsResult);
             return new PagedResult<Transaction>(transactionsResult.Items, transactionsResult.AvailableItems);

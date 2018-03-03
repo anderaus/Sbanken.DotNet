@@ -22,7 +22,7 @@ namespace Sbanken.DotNet.Helpers
             }
         }
 
-        internal static void EqualOrGreaterThan(decimal minimum, decimal value, string name)
+        public static void EqualOrGreaterThan(decimal minimum, decimal value, string name)
         {
             if (value < minimum)
             {

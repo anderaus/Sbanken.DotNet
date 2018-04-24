@@ -24,7 +24,7 @@ namespace Sbanken.DotNet.Http
         {
             _tokenClient = new TokenClient(TokenEndpointUrl, clientId, clientSecret)
             {
-                BasicAuthenticationHeaderStyle = TokenClient.AuthenticationHeaderStyle.Rfc2617
+                BasicAuthenticationHeaderStyle = BasicAuthenticationHeaderStyle.Rfc2617
             };
 
             var accessTokenHandler = new AccessTokenHandler(

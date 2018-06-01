@@ -35,12 +35,12 @@ namespace Sbanken.ConsoleApp
                     account.PrettyPrint();
                 }
 
-                var savingsAccountNumber = accounts.Items.Single(a => a.Name == "Hovedkonto").AccountNumber;
-                var spendingAccountNumber = accounts.Items.Single(a => a.Name == "Visakonto").AccountNumber;
+                var savingsAccountId = accounts.Items.Single(a => a.Name == "Hovedkonto").AccountId;
+                var spendingAccountId = accounts.Items.Single(a => a.Name == "Visakonto").AccountId;
 
                 // Get a single account
                 var savingsAccount =
-                    await client.Bank.GetAccount(AppSettings.CustomerId, savingsAccountNumber);
+                    await client.Bank.GetAccount(AppSettings.CustomerId, savingsAccountId);
                 Console.WriteLine($"{Environment.NewLine}Refetched savings account");
                 savingsAccount.PrettyPrint();
 
@@ -48,12 +48,12 @@ namespace Sbanken.ConsoleApp
                 var transactions =
                     await client.Bank.GetTransactions(
                         customerId: AppSettings.CustomerId,
-                        accountNumber: spendingAccountNumber,
+                        accountId: spendingAccountId,
                         index: 0,
                         length: 20,
                         startDate: DateTime.UtcNow.AddDays(-90),
                         endDate: DateTime.UtcNow.AddDays(-5));
-                Console.WriteLine($"{Environment.NewLine}Latest transactions for account {savingsAccountNumber}");
+                Console.WriteLine($"{Environment.NewLine}Latest transactions for account {savingsAccountId}");
                 foreach (var transaction in transactions.Items)
                 {
                     transaction.PrettyPrint();
@@ -62,8 +62,8 @@ namespace Sbanken.ConsoleApp
                 // Transfer 5 NOK from salary account to savings account
                 await client.Bank.Transfer(
                     AppSettings.CustomerId,
-                    savingsAccountNumber,
-                    spendingAccountNumber,
+                    savingsAccountId,
+                    spendingAccountId,
                     5.0m,
                     "Testing Sbanken.DotNet");
                 Console.WriteLine("Transferred 5 NOK ok!");

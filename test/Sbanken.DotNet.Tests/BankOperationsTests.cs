@@ -38,7 +38,7 @@ namespace Sbanken.DotNet.Tests
         [Fact]
         public async Task GetAccounts_WhenResultIsUnsuccessful_ShouldThrowSbankenException()
         {
-            A.CallTo(() => _connection.Get<ListResult<Account>>(A<string>._, null)).Returns(new ListResult<Account>
+            A.CallTo(() => _connection.Get<ListResult<Account>>(A<string>._, A<string>._, null)).Returns(new ListResult<Account>
             {
                 IsError = true,
                 ErrorMessage = "Something went very wrong",
@@ -54,7 +54,7 @@ namespace Sbanken.DotNet.Tests
         [Fact]
         public async Task GetAccounts_WhenResultIsSuccessful_ShouldReturnAccounts()
         {
-            A.CallTo(() => _connection.Get<ListResult<Account>>(A<string>._, null)).Returns(new ListResult<Account>
+            A.CallTo(() => _connection.Get<ListResult<Account>>(A<string>._, A<string>._, null)).Returns(new ListResult<Account>
             {
                 IsError = false,
                 AvailableItems = 2,
@@ -74,7 +74,7 @@ namespace Sbanken.DotNet.Tests
 
             var result = await _bankOperations.GetAccounts("12037649749");
 
-            A.CallTo(() => _connection.Get<ListResult<Account>>("Bank/api/v1/Accounts/12037649749", null)).MustHaveHappenedOnceExactly();
+            A.CallTo(() => _connection.Get<ListResult<Account>>("Bank/api/v1/Accounts", "12037649749", null)).MustHaveHappenedOnceExactly();
 
             Assert.Equal(2, result.AvailableItems);
             Assert.Equal(2, result.Items.Count);
@@ -85,13 +85,13 @@ namespace Sbanken.DotNet.Tests
         [Fact]
         public async Task GetAccount_WhenCustomerIdIsNull_ShouldThrowArgumentNullException()
         {
-            await Assert.ThrowsAsync<ArgumentNullException>(() => _bankOperations.GetAccount(null, "accountNumber"));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => _bankOperations.GetAccount(null, "accountId"));
         }
 
         [Fact]
         public async Task GetAccount_WhenCustomerIdIsEmpty_ShouldThrowArgumentException()
         {
-            await Assert.ThrowsAsync<ArgumentException>(() => _bankOperations.GetAccount("", "accountNumber"));
+            await Assert.ThrowsAsync<ArgumentException>(() => _bankOperations.GetAccount("", "accountId"));
         }
 
         [Fact]
@@ -109,7 +109,7 @@ namespace Sbanken.DotNet.Tests
         [Fact]
         public async Task GetAccount_WhenResultIsUnsuccessful_ShouldThrowSbankenException()
         {
-            A.CallTo(() => _connection.Get<ItemResult<Account>>(A<string>._, null)).Returns(new ItemResult<Account>
+            A.CallTo(() => _connection.Get<ItemResult<Account>>(A<string>._, A<string>._, null)).Returns(new ItemResult<Account>
             {
                 IsError = true,
                 ErrorMessage = "Something went very wrong",
@@ -125,7 +125,7 @@ namespace Sbanken.DotNet.Tests
         [Fact]
         public async Task GetAccount_WhenResultIsSuccessful_ShouldReturnAccount()
         {
-            A.CallTo(() => _connection.Get<ItemResult<Account>>(A<string>._, null)).Returns(new ItemResult<Account>
+            A.CallTo(() => _connection.Get<ItemResult<Account>>(A<string>._, A<string>._, null)).Returns(new ItemResult<Account>
             {
                 IsError = false,
                 Item = new Account
@@ -137,7 +137,7 @@ namespace Sbanken.DotNet.Tests
 
             var result = await _bankOperations.GetAccount("12037649749", "12341212345");
 
-            A.CallTo(() => _connection.Get<ItemResult<Account>>("Bank/api/v1/Accounts/12037649749/12341212345", null)).MustHaveHappenedOnceExactly();
+            A.CallTo(() => _connection.Get<ItemResult<Account>>("Bank/api/v1/Accounts/12341212345", "12037649749", null)).MustHaveHappenedOnceExactly();
 
             Assert.NotNull(result);
             Assert.Equal("Savings", result.Name);

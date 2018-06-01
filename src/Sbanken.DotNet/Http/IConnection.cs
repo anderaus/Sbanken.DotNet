@@ -7,7 +7,7 @@ namespace Sbanken.DotNet.Http
 {
     public interface IConnection : IDisposable
     {
-        Task<T> Get<T>(string relativeUrl, IDictionary<string, string> parameters = null);
-        Task<NoResult> Post(string relativeUrl, object body);
+        Task<T> Get<T>(string relativeUrl, string customerId, IDictionary<string, string> parameters = null);
+        Task<NoResult> Post(string relativeUrl, string customerId, object body);
     }
 }

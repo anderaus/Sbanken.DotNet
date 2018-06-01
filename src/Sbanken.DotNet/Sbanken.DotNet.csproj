@@ -12,6 +12,7 @@
     <RepositoryUrl>git://github.com/anderaus/Sbanken.DotNet</RepositoryUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/anderaus/Sbanken.DotNet/master/assets/sbanken-dotnet-logo-512.png</PackageIconUrl>
     <Description>Unofficial .NET (C#) client library for Sbanken API</Description>
+    <Version>0.3.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -19,7 +20,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="IdentityModel" Version="3.6.1" />
+    <PackageReference Include="IdentityModel" Version="3.7.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
 

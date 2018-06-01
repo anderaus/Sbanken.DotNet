@@ -24,7 +24,7 @@ namespace Sbanken.DotNet.Http
         {
             _tokenClient = new TokenClient(TokenEndpointUrl, clientId, clientSecret)
             {
-                BasicAuthenticationHeaderStyle = BasicAuthenticationHeaderStyle.Rfc2617
+                BasicAuthenticationHeaderStyle = BasicAuthenticationHeaderStyle.Rfc6749
             };
 
             var accessTokenHandler = new AccessTokenHandler(
@@ -37,28 +37,35 @@ namespace Sbanken.DotNet.Http
             };
         }
 
-        public async Task<T> Get<T>(string relativeUrl, IDictionary<string, string> parameters = null)
+        public async Task<T> Get<T>(string relativeUrl, string customerId, IDictionary<string, string> parameters = null)
         {
             if (parameters != null)
             {
                 relativeUrl = string.Concat(relativeUrl, "?", GetParametersQuery(parameters));
             }
 
-            var response = await _httpClient.GetAsync(relativeUrl);
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, relativeUrl);
+            requestMessage.Headers.Add("customerId", customerId);
+            var response = await _httpClient.SendAsync(requestMessage);
+
             response.EnsureSuccessStatusCode();
 
             var responseContent = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<T>(responseContent);
         }
 
-        public async Task<NoResult> Post(string relativeUrl, object body)
+        public async Task<NoResult> Post(string relativeUrl, string customerId, object body)
         {
             var content = new StringContent(
                 JsonConvert.SerializeObject(body),
                 Encoding.UTF8,
                 "application/json");
 
-            var response = await _httpClient.PostAsync(relativeUrl, content);
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, relativeUrl);
+            requestMessage.Headers.Add("customerId", customerId);
+            requestMessage.Content = content;
+            var response = await _httpClient.SendAsync(requestMessage);
+
             response.EnsureSuccessStatusCode();
 
             var responseContent = await response.Content.ReadAsStringAsync();

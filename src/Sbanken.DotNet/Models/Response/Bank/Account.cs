@@ -4,11 +4,11 @@ namespace Sbanken.DotNet.Models.Response.Bank
 {
     public class Account
     {
+        [JsonProperty("accountId")]
+        public string AccountId { get; set; }
+
         [JsonProperty("accountNumber")]
         public string AccountNumber { get; set; }
-
-        [JsonProperty("customerId")]
-        public string CustomerId { get; set; }
 
         [JsonProperty("ownerCustomerId")]
         public string OwnerCustomerId { get; set; }
@@ -27,8 +27,5 @@ namespace Sbanken.DotNet.Models.Response.Bank
 
         [JsonProperty("creditLimit ")]
         public decimal CreditLimit { get; set; }
-
-        [JsonProperty("defaultAccount")]
-        public bool DefaultAccount { get; set; }
     }
 }

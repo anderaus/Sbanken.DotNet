@@ -53,8 +53,8 @@ using (var client = new SbankenClient(CLIENT_ID, SECRET)) {
     // Transfer amount (399 NOK) between accounts
     await client.Bank.Transfer(
         CUSTOMER_ID,
-        FROM_ACCOUNT,
-        TO_ACCOUT,
+        FROM_ACCOUNT_ID,
+        TO_ACCOUT_ID,
         399.0m,
         "More U save, more U earn");
 }

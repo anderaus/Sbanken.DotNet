@@ -14,7 +14,7 @@ namespace Sbanken.DotNet.Operations
         {
             Ensure.NotNullOrEmpty(customerId, nameof(customerId));
 
-            var customerResult = await Connection.Get<ItemResult<Customer>>($"Customers/api/v1/Customers/{customerId}");
+            var customerResult = await Connection.Get<ItemResult<Customer>>("Customers/api/v1/Customers", customerId);
             EnsureSuccessfulResult(customerResult);
             return customerResult.Item;
         }

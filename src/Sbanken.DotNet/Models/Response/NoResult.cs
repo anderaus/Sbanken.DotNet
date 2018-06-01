@@ -2,11 +2,8 @@
 
 namespace Sbanken.DotNet.Models.Response
 {
-    public class ItemResult<T> : IResult
+    public class NoResult : IResult
     {
-        [JsonProperty("item")]
-        public T Item { get; set; }
-
         [JsonProperty("errorType")]
         public string ErrorType { get; set; }
 

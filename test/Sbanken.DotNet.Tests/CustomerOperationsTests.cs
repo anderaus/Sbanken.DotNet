@@ -36,7 +36,7 @@ namespace Sbanken.DotNet.Tests
         [Fact]
         public async Task Get_WhenResultIsUnsuccessful_ShouldThrowSbankenException()
         {
-            A.CallTo(() => _connection.Get<ItemResult<Customer>>(A<string>._, null)).Returns(new ItemResult<Customer>
+            A.CallTo(() => _connection.Get<ItemResult<Customer>>(A<string>._, A<string>._, null)).Returns(new ItemResult<Customer>
             {
                 IsError = true,
                 ErrorMessage = "Something went very wrong",
@@ -52,7 +52,7 @@ namespace Sbanken.DotNet.Tests
         [Fact]
         public async Task Get_WhenResultIsSuccessful_ShouldReturnCustomer()
         {
-            A.CallTo(() => _connection.Get<ItemResult<Customer>>(A<string>._, null)).Returns(new ItemResult<Customer>
+            A.CallTo(() => _connection.Get<ItemResult<Customer>>(A<string>._, A<string>._, null)).Returns(new ItemResult<Customer>
             {
                 IsError = false,
                 Item = new Customer
@@ -65,7 +65,7 @@ namespace Sbanken.DotNet.Tests
 
             var result = await _customerOperations.Get("12037649749");
 
-            A.CallTo(() => _connection.Get<ItemResult<Customer>>("Customers/api/v1/Customers/12037649749", null)).MustHaveHappenedOnceExactly();
+            A.CallTo(() => _connection.Get<ItemResult<Customer>>("Customers/api/v1/Customers", "12037649749", null)).MustHaveHappenedOnceExactly();
 
             Assert.Equal("Roger", result.FirstName);
             Assert.Equal("Wilco", result.LastName);

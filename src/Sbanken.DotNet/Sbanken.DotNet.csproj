@@ -1,8 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.4</TargetFramework>
-    <VersionPrefix>0.2.0</VersionPrefix>
+    <TargetFrameworks>netstandard1.4;netstandard2.0</TargetFrameworks>
+    <VersionPrefix>0.3.0</VersionPrefix>
     <Authors>Anders Austad</Authors>
     <Company />
     <Product></Product>

@@ -13,7 +13,7 @@ namespace Sbanken.DotNet.Http
     public class Connection : IConnection
     {
         private const string ApiBaseUrl = "https://api.sbanken.no/";
-        private const string TokenEndpointUrl = "https://api.sbanken.no/identityserver/connect/token";
+        private const string TokenEndpointUrl = "https://auth.sbanken.no/identityserver/connect/token";
 
         private bool _disposed;
 
@@ -27,11 +27,12 @@ namespace Sbanken.DotNet.Http
                 BasicAuthenticationHeaderStyle = BasicAuthenticationHeaderStyle.Rfc6749
             };
 
-            var accessTokenHandler = new AccessTokenHandler(
+            var accessTokenDelegatingHandler = new AccessTokenDelegatingHandler(
                 _tokenClient,
-                scope: null);
+                scope: null,
+                innerHandler: new HttpClientHandler());
 
-            _httpClient = new HttpClient(accessTokenHandler)
+            _httpClient = new HttpClient(accessTokenDelegatingHandler)
             {
                 BaseAddress = new Uri(ApiBaseUrl)
             };

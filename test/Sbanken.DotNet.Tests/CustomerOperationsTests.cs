@@ -65,7 +65,7 @@ namespace Sbanken.DotNet.Tests
 
             var result = await _customerOperations.Get("12037649749");
 
-            A.CallTo(() => _connection.Get<ItemResult<Customer>>("Customers/api/v1/Customers", "12037649749", null)).MustHaveHappenedOnceExactly();
+            A.CallTo(() => _connection.Get<ItemResult<Customer>>("exec.customers/api/v1/Customers", "12037649749", null)).MustHaveHappenedOnceExactly();
 
             Assert.Equal("Roger", result.FirstName);
             Assert.Equal("Wilco", result.LastName);

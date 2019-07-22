@@ -12,13 +12,15 @@ namespace Sbanken.DotNet.Operations
 {
     public class BankOperations : OperationsBase, IBankOperations
     {
+        private const string BankApiBase = "exec.bank";
+
         public BankOperations(IConnection connection) : base(connection) { }
 
         public async Task<PagedResult<Account>> GetAccounts(string customerId)
         {
             Ensure.NotNullOrEmpty(customerId, nameof(customerId));
 
-            var accountsResult = await Connection.Get<ListResult<Account>>("Bank/api/v1/Accounts", customerId);
+            var accountsResult = await Connection.Get<ListResult<Account>>($"{BankApiBase}/api/v1/Accounts", customerId);
             EnsureSuccessfulResult(accountsResult);
             return new PagedResult<Account>(accountsResult.Items, accountsResult.AvailableItems);
         }
@@ -28,7 +30,7 @@ namespace Sbanken.DotNet.Operations
             Ensure.NotNullOrEmpty(customerId, nameof(customerId));
             Ensure.NotNullOrEmpty(accountId, nameof(accountId));
 
-            var accountResult = await Connection.Get<ItemResult<Account>>($"Bank/api/v1/Accounts/{accountId}", customerId);
+            var accountResult = await Connection.Get<ItemResult<Account>>($"{BankApiBase}/api/v1/Accounts/{accountId}", customerId);
             EnsureSuccessfulResult(accountResult);
             return accountResult.Item;
         }
@@ -49,7 +51,7 @@ namespace Sbanken.DotNet.Operations
             if (endDate.HasValue) parameters.Add("endDate", endDate.Value.ToString("o"));
 
             var transactionsResult = await Connection.Get<ListResult<Transaction>>(
-                $"Bank/api/v1/Transactions/{accountId}", customerId, parameters);
+                $"{BankApiBase}/api/v1/Transactions/{accountId}", customerId, parameters);
 
             EnsureSuccessfulResult(transactionsResult);
             return new PagedResult<Transaction>(transactionsResult.Items, transactionsResult.AvailableItems);
@@ -72,7 +74,7 @@ namespace Sbanken.DotNet.Operations
             };
 
             var transferResult = await Connection.Post(
-                "Bank/api/v1/Transfers", customerId, transferRequestBody);
+                $"{BankApiBase}/api/v1/Transfers", customerId, transferRequestBody);
 
             EnsureSuccessfulResult(transferResult);
         }

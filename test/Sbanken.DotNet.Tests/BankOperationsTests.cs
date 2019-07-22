@@ -74,7 +74,7 @@ namespace Sbanken.DotNet.Tests
 
             var result = await _bankOperations.GetAccounts("12037649749");
 
-            A.CallTo(() => _connection.Get<ListResult<Account>>("Bank/api/v1/Accounts", "12037649749", null)).MustHaveHappenedOnceExactly();
+            A.CallTo(() => _connection.Get<ListResult<Account>>("exec.bank/api/v1/Accounts", "12037649749", null)).MustHaveHappenedOnceExactly();
 
             Assert.Equal(2, result.AvailableItems);
             Assert.Equal(2, result.Items.Count);
@@ -137,7 +137,7 @@ namespace Sbanken.DotNet.Tests
 
             var result = await _bankOperations.GetAccount("12037649749", "12341212345");
 
-            A.CallTo(() => _connection.Get<ItemResult<Account>>("Bank/api/v1/Accounts/12341212345", "12037649749", null)).MustHaveHappenedOnceExactly();
+            A.CallTo(() => _connection.Get<ItemResult<Account>>("exec.bank/api/v1/Accounts/12341212345", "12037649749", null)).MustHaveHappenedOnceExactly();
 
             Assert.NotNull(result);
             Assert.Equal("Savings", result.Name);

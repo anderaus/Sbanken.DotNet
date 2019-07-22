@@ -8,13 +8,15 @@ namespace Sbanken.DotNet.Operations
 {
     public class CustomerOperations : OperationsBase, ICustomerOperations
     {
+        private const string CustomerApiBase = "exec.customers";
+
         public CustomerOperations(IConnection connection) : base(connection) { }
 
         public async Task<Customer> Get(string customerId)
         {
             Ensure.NotNullOrEmpty(customerId, nameof(customerId));
 
-            var customerResult = await Connection.Get<ItemResult<Customer>>("Customers/api/v1/Customers", customerId);
+            var customerResult = await Connection.Get<ItemResult<Customer>>($"{CustomerApiBase}/api/v1/Customers", customerId);
             EnsureSuccessfulResult(customerResult);
             return customerResult.Item;
         }

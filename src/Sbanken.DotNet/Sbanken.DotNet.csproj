@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard1.4;netstandard2.0</TargetFrameworks>
-    <VersionPrefix>0.3.0</VersionPrefix>
+    <VersionPrefix>0.4.0</VersionPrefix>
     <Authors>Anders Austad</Authors>
     <Company />
     <Product></Product>
@@ -12,7 +12,7 @@
     <RepositoryUrl>git://github.com/anderaus/Sbanken.DotNet</RepositoryUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/anderaus/Sbanken.DotNet/master/assets/sbanken-dotnet-logo-512.png</PackageIconUrl>
     <Description>Unofficial .NET (C#) client library for Sbanken API</Description>
-    <Version>0.3.0</Version>
+    <Version>0.4.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

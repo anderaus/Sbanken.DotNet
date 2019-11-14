@@ -45,9 +45,8 @@ using (var client = new SbankenClient(CLIENT_ID, SECRET)) {
     var accounts = await client.Bank.GetAccounts(CUSTOMER_ID);
 
     // Loop accounts and print balance
-    foreach (var account in accounts) {
-        Console.WriteLine(
-            $"Got account {account.Name} with balance {account.Balance});
+    foreach (var account in accounts.Items) {
+        Console.WriteLine($"Got account {account.Name} with balance {account.Balance}");
     }
 
     // Transfer amount (399 NOK) between accounts

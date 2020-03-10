@@ -10,18 +10,19 @@
     <PackageProjectUrl>https://github.com/anderaus/Sbanken.DotNet</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>git://github.com/anderaus/Sbanken.DotNet</RepositoryUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/anderaus/Sbanken.DotNet/master/assets/sbanken-dotnet-logo-512.png</PackageIconUrl>
     <Description>Unofficial .NET (C#) client library for Sbanken API</Description>
     <Version>0.4.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <LangVersion>default</LangVersion>
+    <PackageIcon>sbanken-dotnet-logo-512.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="IdentityModel" Version="3.10.10" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <None Include="..\..\assets\sbanken-dotnet-logo-512.png" Pack="true" PackagePath=""/>
   </ItemGroup>
 
 </Project>

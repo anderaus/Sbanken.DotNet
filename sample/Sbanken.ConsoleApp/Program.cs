@@ -12,11 +12,11 @@ namespace Sbanken.ConsoleApp
     {
         private static AppSettings AppSettings { get; set; }
 
-        static void Main(string[] args)
+        static async Task Main()
         {
             ReadConfiguration();
 
-            RunExample().GetAwaiter().GetResult();
+            await RunExample();
         }
 
         private static async Task RunExample()
